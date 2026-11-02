@@ -3,7 +3,7 @@
 
 module "app" {
   # Real: git::https://bitbucket.org/<workspace>/tf-app-dev.git//stack?ref=<tag>
-  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/pattern-2/tf-app-dev/stack?ref=tf-app-dev-v2.0.0"
+  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/pattern-2/tf-app-dev/stack?ref=tf-app-dev-v2.1.0"
 
   config = var.config
 }
