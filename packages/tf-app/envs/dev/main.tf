@@ -1,4 +1,5 @@
-# Identical in every env folder. Change values in terraform.tfvars, code in ../../modules/app.
+# Dev uses the working copy of the module, so it always tests the latest code.
+# Prod (../prod) is identical except its module source pins a release tag.
 
 variable "project_id" { type = string }
 variable "region" { type = string }

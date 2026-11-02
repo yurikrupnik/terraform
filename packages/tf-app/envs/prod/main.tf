@@ -1,4 +1,5 @@
-# Identical in every env folder. Change values in terraform.tfvars, code in ../../modules/app.
+# Prod pins the module to a release tag; dev uses the working copy (../../modules/app).
+# Promote: bump ?ref= to a newer tf-app-v* tag after dev is green.
 
 variable "project_id" { type = string }
 variable "region" { type = string }
@@ -13,7 +14,9 @@ provider "google" {
 }
 
 module "app" {
-  source = "../../modules/app"
+  # Local demo (no remote). With GitHub this would be:
+  # git::https://github.com/<org>/terraform.git//packages/tf-app/modules/app?ref=tf-app-v1.0.0
+  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/tf-app/modules/app?ref=tf-app-v1.0.0"
 
   project_id              = var.project_id
   region                  = var.region

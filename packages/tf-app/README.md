@@ -4,13 +4,25 @@ GCS bucket + Pub/Sub topic, deployed to dev and prod from the same code.
 
 ```
 modules/app/          shared code (resources, variables, outputs) — edit here
-envs/dev/main.tf      thin root: provider + module call (identical across envs)
+envs/dev/main.tf      thin root: provider + module call, source = ../../modules/app (working copy)
 envs/dev/terraform.tfvars   dev values
-envs/prod/main.tf     same as dev
+envs/prod/main.tf     same root, source pinned to a git tag: ...//packages/tf-app/modules/app?ref=tf-app-vX.Y.Z
 envs/prod/terraform.tfvars  prod values
 ```
 
 Each env folder is its own Terraform root, so dev and prod keep separate state.
+
+## Releases
+
+Module changes reach dev immediately and prod only through a tag:
+
+1. Merge the module change; `plan:dev` / `apply:dev`.
+2. Tag: `git tag -a tf-app-v1.1.0 -m "..."` (prefix `tf-app-` keeps per-module tag series in the monorepo).
+3. Bump `?ref=` in `envs/prod/main.tf` (or in the separate prod repo `../tf-app-prod`), then
+   `initialize:prod` (re-downloads the module), `plan:prod`, `apply:prod`.
+
+The `git::file:///...` source is for this local demo (no remote). With GitHub it becomes
+`git::https://github.com/<org>/terraform.git//packages/tf-app/modules/app?ref=tf-app-v1.0.0`.
 
 ## Usage
 
