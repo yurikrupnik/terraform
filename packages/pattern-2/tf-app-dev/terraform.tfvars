@@ -1,4 +1,3 @@
-# Dev values for ./stack (dev runs the stack directly: terraform -chdir=stack plan -var-file=../terraform.tfvars).
 config = {
   project_id              = "dev-project-id"
   region                  = "us-central1"

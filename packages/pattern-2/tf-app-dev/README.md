@@ -5,10 +5,11 @@ Pattern 2 (prod reuses dev code), dev app.
 | Path               | What                                                                          |
 | ------------------ | ----------------------------------------------------------------------------- |
 | `stack/`           | the code once (Cloud Foundation Fabric modules); the only `variables.tf`      |
-| `terraform.tfvars` | dev values (`config = { ... }`)                                               |
+| `main.tf`          | calls `./stack` and passes `config` through                                   |
+| `terraform.tfvars` | dev values (`config = { ... }`), auto-loaded                                  |
 
-Dev runs `stack/` directly as its Terraform root (`-var-file=../terraform.tfvars`), always from the working
-copy. Prod runs a tagged version of the same folder as a module.
+The repo root is the Terraform root: plain `terraform init && terraform plan` (what TFE runs), no extra
+flags. Dev always runs the working copy of `stack/`; prod runs a tagged version of the same folder.
 
 ```bash
 npx nx run pattern-2-tf-app-dev:initialize

@@ -2,15 +2,14 @@
   "name": "pattern-2-tf-app-dev",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "packages/pattern-2/tf-app-dev/stack",
+  "sourceRoot": "packages/pattern-2/tf-app-dev",
   "tags": [],
   "targets": {
     "plan": {
       "executor": "@nx-extend/terraform:plan",
       "options": {
         "planFile": "defaultplan",
-        "ciMode": true,
-        "varFile": "../terraform.tfvars"
+        "ciMode": true
       }
     },
     "initialize": {
@@ -32,8 +31,7 @@
       "executor": "@nx-extend/terraform:fmt",
       "options": {
         "ciMode": true,
-        "formatWrite": false,
-        "root": "packages/pattern-2/tf-app-dev"
+        "formatWrite": false
       }
     },
     "apply": {
@@ -45,10 +43,10 @@
       }
     },
     "destroy": {
-      "executor": "nx:run-commands",
+      "executor": "@nx-extend/terraform:destroy",
       "options": {
-        "command": "terraform destroy -var-file=../terraform.tfvars",
-        "cwd": "packages/pattern-2/tf-app-dev/stack"
+        "ciMode": true,
+        "autoApproval": false
       }
     },
     "validate": {

@@ -2,7 +2,7 @@
 # Upgrade: bump ?ref= to a newer tf-app-module-v* tag. Rollback: set it back.
 
 module "app" {
-  # Real: git::https://bitbucket.org/<workspace>/terraform.git//packages/pattern-3/tf-app-module?ref=<tag>
+  # Real: git::https://bitbucket.org/<workspace>/tf-app-module.git?ref=<tag>
   source = "git::file:///Users/yurikrupnik/shit/terraform//packages/pattern-3/tf-app-module?ref=tf-app-module-v1.1.0"
 
   project_id              = var.project_id
