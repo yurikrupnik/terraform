@@ -3,7 +3,7 @@
 
 module "app" {
   # Real: git::https://bitbucket.org/<workspace>/terraform.git//packages/pattern-2/tf-app-dev/stack?ref=<tag>
-  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/tf-app-dev/stack?ref=tf-app-dev-v1.1.0"
+  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/pattern-2/tf-app-dev/stack?ref=tf-app-dev-v1.1.1"
 
   project_id              = "prod-project-id"
   region                  = "us-central1"
