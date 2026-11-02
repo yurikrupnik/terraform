@@ -5,3 +5,7 @@ output "bucket_name" {
 output "topic_id" {
   value = module.topic.id
 }
+
+output "subscription_ids" {
+  value = module.topic.subscription_id
+}

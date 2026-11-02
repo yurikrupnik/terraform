@@ -32,3 +32,8 @@ variable "topic_message_retention" {
   description = "How long the topic retains published messages (e.g. \"86400s\")."
   type        = string
 }
+
+variable "ack_deadline_seconds" {
+  description = "Seconds a subscriber has to ack a message before it is redelivered."
+  type        = number
+}

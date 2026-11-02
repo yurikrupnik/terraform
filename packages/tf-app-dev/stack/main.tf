@@ -38,4 +38,10 @@ module "topic" {
   name                       = "tf-app-${var.environment}"
   message_retention_duration = var.topic_message_retention
   labels                     = local.labels
+
+  subscriptions = {
+    "tf-app-${var.environment}" = {
+      ack_deadline_seconds = var.ack_deadline_seconds
+    }
+  }
 }
