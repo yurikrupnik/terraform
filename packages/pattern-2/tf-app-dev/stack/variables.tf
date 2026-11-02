@@ -1,39 +1,17 @@
-variable "project_id" {
-  description = "GCP project to deploy into."
-  type        = string
-}
-
-variable "region" {
-  description = "Location for the bucket."
-  type        = string
-}
-
-variable "environment" {
-  description = "Environment name; used in resource names and labels."
-  type        = string
+variable "config" {
+  description = "All settings for one environment of tf-app. Values come from the env's terraform.tfvars."
+  type = object({
+    project_id              = string # GCP project to deploy into
+    region                  = string # bucket location
+    environment             = string # "dev" or "prod"; used in names and labels
+    bucket_force_destroy    = bool   # allow deleting a non-empty bucket
+    bucket_versioning       = bool   # keep previous object versions
+    topic_message_retention = string # e.g. "86400s"
+    ack_deadline_seconds    = number # subscription ack deadline
+  })
 
   validation {
-    condition     = contains(["dev", "prod"], var.environment)
-    error_message = "environment must be \"dev\" or \"prod\"."
+    condition     = contains(["dev", "prod"], var.config.environment)
+    error_message = "config.environment must be \"dev\" or \"prod\"."
   }
-}
-
-variable "bucket_force_destroy" {
-  description = "Allow deleting the bucket while it still contains objects."
-  type        = bool
-}
-
-variable "bucket_versioning" {
-  description = "Keep previous object versions."
-  type        = bool
-}
-
-variable "topic_message_retention" {
-  description = "How long the topic retains published messages (e.g. \"86400s\")."
-  type        = string
-}
-
-variable "ack_deadline_seconds" {
-  description = "Seconds a subscriber has to ack a message before it is redelivered."
-  type        = number
 }
