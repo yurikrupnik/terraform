@@ -15,8 +15,8 @@ provider "google" {
 
 module "app" {
   # Local demo (no remote). With GitHub this would be:
-  # git::https://github.com/<org>/terraform.git//packages/tf-app/modules/app?ref=tf-app-v1.0.0
-  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/tf-app/modules/app?ref=tf-app-v1.0.0"
+  # git::https://github.com/<org>/terraform.git//packages/tf-app/modules/app?ref=<tag>
+  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/tf-app/modules/app?ref=tf-app-v2.0.0"
 
   project_id              = var.project_id
   region                  = var.region
