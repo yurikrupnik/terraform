@@ -1,7 +1,8 @@
 # pattern-2-tf-app-dev
 
 Pattern 2 (prod reuses dev code), dev app. Holds the tf-app code once (`stack/`, built from Cloud Foundation
-Fabric modules) and the dev values (`main.tf`, `source = "./stack"`). Dev always runs the working copy.
+Fabric modules), calls it from `main.tf` (`source = "./stack"`), and keeps dev values in `terraform.tfvars`.
+Dev always runs the working copy.
 
 ```bash
 npx nx run pattern-2-tf-app-dev:initialize
