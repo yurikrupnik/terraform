@@ -45,3 +45,24 @@ module "topic" {
     }
   }
 }
+
+# Dev-only resource: same code in every environment, created only where config.scratch_bucket is set.
+# Prod's terraform.tfvars does not set it, so prod's plan never contains this bucket.
+module "scratch_bucket" {
+  source = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/gcs?ref=v59.2.0"
+  count  = var.config.scratch_bucket == null ? 0 : 1
+
+  project_id    = var.config.project_id
+  prefix        = var.config.project_id
+  name          = "tf-app-${var.config.environment}-scratch"
+  location      = var.config.region
+  force_destroy = true
+  labels        = local.labels
+
+  lifecycle_rules = {
+    expire-objects = {
+      action    = { type = "Delete" }
+      condition = { age = var.config.scratch_bucket.delete_after_days }
+    }
+  }
+}
