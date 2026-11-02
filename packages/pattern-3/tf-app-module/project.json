@@ -15,8 +15,22 @@
     "fmt": {
       "executor": "@nx-extend/terraform:fmt",
       "options": {
-        "ciMode": true,
-        "formatWrite": false
+        "ciMode": false,
+        "formatWrite": true
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "terraform fmt",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "tflint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tflint",
+        "cwd": "{projectRoot}"
       }
     },
     "validate": {
