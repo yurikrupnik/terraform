@@ -18,8 +18,10 @@ Module changes reach dev immediately and prod only through a tag:
 
 1. Merge the module change; `plan:dev` / `apply:dev`.
 2. Tag: `git tag -a tf-app-v1.1.0 -m "..."` (prefix `tf-app-` keeps per-module tag series in the monorepo).
-3. Bump `?ref=` in `envs/prod/main.tf` (or in the separate prod repo `../tf-app-prod`), then
-   `initialize:prod` (re-downloads the module), `plan:prod`, `apply:prod`.
+3. Bump `?ref=` in `envs/prod/main.tf`, then `initialize:prod` (re-downloads the module), `plan:prod`, `apply:prod`.
+
+This is the one-repo layout (option 4 in the promotion doc). Options 2 and 3 as separate repos:
+`../promotion-demo/` (outside this workspace).
 
 The `git::file:///...` source is for this local demo (no remote). With GitHub it becomes
 `git::https://github.com/<org>/terraform.git//packages/tf-app/modules/app?ref=tf-app-v1.0.0`.
