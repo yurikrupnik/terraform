@@ -3,7 +3,7 @@
 
 module "app" {
   # Real: git::https://bitbucket.org/<workspace>/terraform.git//packages/tf-app-dev/stack?ref=<tag>
-  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/tf-app-dev/stack?ref=tf-app-dev-v1.0.0"
+  source = "git::file:///Users/yurikrupnik/shit/terraform//packages/tf-app-dev/stack?ref=tf-app-dev-v1.1.0"
 
   project_id              = "prod-project-id"
   region                  = "us-central1"
@@ -11,4 +11,5 @@ module "app" {
   bucket_force_destroy    = false
   bucket_versioning       = true
   topic_message_retention = "604800s"
+  ack_deadline_seconds    = 60
 }
