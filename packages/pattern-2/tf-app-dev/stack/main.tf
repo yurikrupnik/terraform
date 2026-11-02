@@ -47,7 +47,7 @@ module "topic" {
 }
 
 # Dev-only resource: same code in every environment, created only where config.scratch_bucket is set.
-# Prod's terraform.tfvars does not set it, so prod's plan never contains this bucket.
+# Prod's terraform.tfvars does not set it, and a validation in variables.tf rejects it for prod.
 module "scratch_bucket" {
   source = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/gcs?ref=v59.2.0"
   count  = var.config.scratch_bucket == null ? 0 : 1

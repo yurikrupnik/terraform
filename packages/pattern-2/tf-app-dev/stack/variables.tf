@@ -9,7 +9,7 @@ variable "config" {
     topic_message_retention = string # e.g. "86400s"
     ack_deadline_seconds    = number # subscription ack deadline
 
-    # Optional, dev-only: set it in dev's terraform.tfvars, leave it out in prod -> resource not created.
+    # Optional, dev-only: set it in dev's terraform.tfvars; prod is rejected by the validation below.
     scratch_bucket = optional(object({
       delete_after_days = number # objects are deleted automatically after this many days
     }))
@@ -21,7 +21,12 @@ variable "config" {
   }
 
   validation {
-    condition     = try(var.config.scratch_bucket.delete_after_days >= 1, true)
+    condition     = var.config.environment != "prod" || var.config.scratch_bucket == null
+    error_message = "scratch_bucket is dev-only and cannot be enabled in prod."
+  }
+
+  validation {
+    condition     = var.config.scratch_bucket == null || var.config.scratch_bucket.delete_after_days >= 1
     error_message = "config.scratch_bucket.delete_after_days must be at least 1."
   }
 }
