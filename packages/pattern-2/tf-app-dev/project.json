@@ -1,8 +1,9 @@
 {
-  "name": "tf-app-dev",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "pattern-2-tf-app-dev",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "packages/tf-app-dev",
+  "sourceRoot": "packages/pattern-2/tf-app-dev",
+  "tags": [],
   "targets": {
     "plan": {
       "executor": "@nx-extend/terraform:plan",
@@ -54,6 +55,5 @@
         "ciMode": true
       }
     }
-  },
-  "tags": []
+  }
 }
