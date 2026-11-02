@@ -165,3 +165,6 @@ Add `stacks/<name>/`, `<name>-dev/` (relative source, implicit dependency on the
 There is no git remote, so prod's `source` is `git::file:///…/terraform//packages/pattern-4/stacks/tf-app?ref=…`.
 In the real repo it is `git::https://bitbucket.org/<workspace>/landing-zone.git//stacks/tf-app?ref=lz-v1.1.0`.
 This demo repo also contains tags from patterns 2 and 3; a real pattern-4 repo has only `lz-v*` tags.
+
+See also: [pattern 2](../pattern-2/README.md) (prod reuses dev code), [pattern 3](../pattern-3/README.md)
+(code in its own module repo).
