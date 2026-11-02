@@ -1,0 +1,30 @@
+{
+  "name": "pattern-3-tf-app-module",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/pattern-3/tf-app-module",
+  "targets": {
+    "initialize": {
+      "executor": "@nx-extend/terraform:init",
+      "options": {
+        "ciMode": true,
+        "upgrade": false,
+        "migrateState": false
+      }
+    },
+    "fmt": {
+      "executor": "@nx-extend/terraform:fmt",
+      "options": {
+        "ciMode": true,
+        "formatWrite": false
+      }
+    },
+    "validate": {
+      "executor": "@nx-extend/terraform:validate",
+      "options": {
+        "ciMode": true
+      }
+    }
+  },
+  "tags": []
+}
